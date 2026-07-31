@@ -1,17 +1,19 @@
+// shared/app_text_style.dart
 import 'package:flutter/material.dart';
-import 'package:pg1/shered/app_colors.dart'; // Ajuste o caminho conforme sua estrutura
+import 'app_colors.dart';
 
-// Classe responsável por armazenar os estilos de texto do aplicativo
 class AppTextStyle {
-  static TextStyle title = TextStyle(
-    color: AppColors.preto, // Use a cor que você definiu no AppColors
+  static TextStyle title = const TextStyle(
+    color: AppColors.preto,
     fontSize: 24,
     fontWeight: FontWeight.bold,
   );
 
-  static TextStyle buttonLabel = TextStyle(
-    color: AppColors.branco, // Use a cor que você definiu no AppColors
-    fontSize: 24,
-    fontWeight: FontWeight.bold,
+  static TextStyle buttonLabel = const TextStyle(
+    color: AppColors.branco,
+    fontSize: 16,
+    fontWeight: FontWeight.w600,
   );
+
+  static TextStyle hint = TextStyle(color: AppColors.cinza, fontSize: 14);
 }

@@ -1,6 +1,10 @@
+// pages/login_page.dart
 import 'package:flutter/material.dart';
+
 import 'package:pg1/shered/app_colors.dart';
-import 'package:pg1/shered/app_text_style.dart';
+import 'package:pg1/shered/app_text_button.dart';
+import 'package:pg1/shered/app_text_field.dart';
+import 'package:pg1/shered/wigdgets/app_elevated_button.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
@@ -8,146 +12,127 @@ class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        title: const Text('Login'),
+        centerTitle: true,
+        backgroundColor: Colors.white,
+        foregroundColor: AppColors.preto,
+        elevation: 0,
+      ),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 24),
           child: Column(
             children: [
-              const Spacer(),
-              Text(
+              const SizedBox(height: 20),
+
+              // Título
+              const Text(
                 '+DevsEcomm',
                 style: TextStyle(
                   color: AppColors.cinza,
-                  fontSize: 28,
+                  fontSize: 32,
                   fontWeight: FontWeight.bold,
+                  letterSpacing: 1,
                 ),
               ),
-              const Spacer(flex: 2),
 
-              // Campo de Email
-              TextField(
-                decoration: InputDecoration(
-                  hintText: "email@dominio.com",
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(14),
-                    borderSide: BorderSide(color: AppColors.cinza),
-                  ),
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(14),
-                    borderSide: BorderSide(color: AppColors.cinza),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(14),
-                    borderSide: BorderSide(color: AppColors.cinza),
-                  ),
-                ),
+              const SizedBox(height: 40),
+
+              // Campo Email
+              const AppTextField(
+                hintText: 'email@dominio.com',
+                keyboardType: TextInputType.emailAddress,
               ),
 
               const SizedBox(height: 16),
 
-              // Campo de Senha (agora com hint correto)
-              TextField(
-                obscureText: true, // Para esconder a senha
-                decoration: InputDecoration(
-                  hintText: "Digite sua senha",
-                  suffixIcon: const Icon(
-                    Icons.visibility_off,
-                  ), // Ícone de visibilidade
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(14),
-                    borderSide: BorderSide(color: AppColors.cinza),
+              // Campo Senha
+              const AppTextField(
+                hintText: 'Digite sua senha',
+                obscureText: true,
+                suffixIcon: Icon(
+                  Icons.visibility_off,
+                  color: AppColors.cinza,
+                  size: 20,
+                ),
+              ),
+
+              const SizedBox(height: 12),
+
+              // Esqueci minha senha
+              Align(
+                alignment: Alignment.centerRight,
+                child: TextButton(
+                  onPressed: () {},
+                  style: TextButton.styleFrom(
+                    padding: EdgeInsets.zero,
+                    minimumSize: const Size(0, 0),
+                    tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                   ),
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(14),
-                    borderSide: BorderSide(color: AppColors.cinza),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(14),
-                    borderSide: BorderSide(color: AppColors.cinza),
+                  child: const Text(
+                    'Esqueci minha senha',
+                    style: TextStyle(
+                      color: AppColors.cinza,
+                      fontSize: 14,
+                      fontWeight: FontWeight.w500,
+                    ),
                   ),
                 ),
               ),
 
-              const SizedBox(height: 8),
-
-              TextButton(
-                onPressed: () {},
-                child: const Text("Esqueci minha senha"),
-              ),
-
-              const SizedBox(height: 16),
+              const SizedBox(height: 24),
 
               // Botão Entrar
-              SizedBox(
-                width: double.infinity,
-                child: 
-                AppElevated_button(),
-              ),
+              AppElevatedButton(label: 'Entrar', onPressed: () {}),
 
-              const SizedBox(height: 8),
+              const SizedBox(height: 12),
 
-              // Botão Sair
-              SizedBox(
-                width: double.infinity,
-                child: ElevatedButton(
-                  onPressed: () {},
-                  child: const Text('Sair'),
-                ),
-              ),
+              // Botão Cadastrar-se (estilo texto)
+              AppTextButton(label: 'Cadastrar-se', onPressed: () {}),
 
-              const Spacer(flex: 2),
+              const Spacer(),
 
               // Termos e Políticas
-              GestureDetector(
-                onTap: () {},
-                child: RichText(
-                  textAlign: TextAlign.center,
-                  text: TextSpan(
-                    children: [
-                      TextSpan(
-                        text: 'Termo de Serviço ',
-                        style: TextStyle(color: AppColors.preto),
-                      ),
-                      TextSpan(
-                        text: 'e ',
-                        style: TextStyle(color: AppColors.cinza),
-                      ),
-                      TextSpan(
-                        text: 'Politicas de Privacidade',
-                        style: TextStyle(color: AppColors.preto),
-                      ),
-                    ],
+              Padding(
+                padding: const EdgeInsets.only(bottom: 16),
+                child: GestureDetector(
+                  onTap: () {},
+                  child: RichText(
+                    textAlign: TextAlign.center,
+                    text: const TextSpan(
+                      children: [
+                        TextSpan(
+                          text: 'Termos de Serviço ',
+                          style: TextStyle(
+                            color: AppColors.preto,
+                            fontSize: 13,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                        TextSpan(
+                          text: '⇨ ',
+                          style: TextStyle(
+                            color: AppColors.cinza,
+                            fontSize: 13,
+                          ),
+                        ),
+                        TextSpan(
+                          text: 'Política de Privacidade',
+                          style: TextStyle(
+                            color: AppColors.preto,
+                            fontSize: 13,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
-
-              const Spacer(),
             ],
           ),
-        ),
-      ),
-    );
-  }
-}
-
-class AppElevated_button extends StatelessWidget {
-  const AppElevated_button({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return ElevatedButton(
-      onPressed: () {},
-      child: Text('Entrar'),
-      style: ElevatedButton.styleFrom(
-    
-        minimumSize: Size.fromHeight(48),
-        foregroundColor: AppColors.branco,
-        backgroundColor: AppColors.preto,
-        textStyle: AppTextStyle.buttonLabel,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadiusGeometry.circular(12),
         ),
       ),
     );
