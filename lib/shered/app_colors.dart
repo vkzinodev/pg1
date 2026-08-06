@@ -1,8 +1,7 @@
-// shared/app_colors.dart
 import 'package:flutter/material.dart';
 
 class AppColors {
-  static const Color preto = Color(0xFF1A1A1A);
+  static const Color preto = Color.fromARGB(255, 0, 0, 0);
   static const Color branco = Color(0xFFFFFFFF);
   static const Color cinza = Color(0xFF9E9E9E);
   static const Color cinzaClaro = Color(0xFFF5F5F5);

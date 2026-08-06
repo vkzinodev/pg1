@@ -1,4 +1,3 @@
-// widgets/app_elevated_button.dart
 import 'package:flutter/material.dart';
 import 'package:pg1/shered/app_colors.dart';
 
@@ -15,7 +14,7 @@ class AppElevatedButton extends StatelessWidget {
     required this.label,
     this.backgroundColor,
     this.foregroundColor,
-    this.height = 50,
+    this.height = 42,
   });
 
   @override
@@ -23,23 +22,28 @@ class AppElevatedButton extends StatelessWidget {
     return SizedBox(
       width: double.infinity,
       height: height,
+
       child: ElevatedButton(
         onPressed: onPressed,
-        child: Text(
-          label,
-          style: const TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.w600,
-            color: AppColors.branco,
-          ),
-        ),
+
         style: ElevatedButton.styleFrom(
           backgroundColor: backgroundColor ?? AppColors.preto,
           foregroundColor: foregroundColor ?? AppColors.branco,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12),
-          ),
+
           elevation: 0,
+
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+        ),
+
+        child: Text(
+          label,
+          style: const TextStyle(
+            color: AppColors.branco,
+            fontSize: 14,
+            fontWeight: FontWeight.w500,
+          ),
         ),
       ),
     );

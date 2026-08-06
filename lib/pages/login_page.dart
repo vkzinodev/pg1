@@ -1,67 +1,122 @@
-// pages/login_page.dart
 import 'package:flutter/material.dart';
-
+import 'package:pg1/pages/signup_page.dart';
 import 'package:pg1/shered/app_colors.dart';
 import 'package:pg1/shered/app_text_button.dart';
 import 'package:pg1/shered/app_text_field.dart';
 import 'package:pg1/shered/wigdgets/app_elevated_button.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
+
+  static const String routeName = '/login';
+
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  String email = '';
+  String senha = '';
+  bool isActiveButton = false;
+  bool rememberMe = false;
 
   @override
   Widget build(BuildContext context) {
+    isActiveButton = email.trim().isNotEmpty && senha.trim().isNotEmpty;
+
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(
-        title: const Text('Login'),
-        centerTitle: true,
-        backgroundColor: Colors.white,
-        foregroundColor: AppColors.preto,
-        elevation: 0,
-      ),
+      resizeToAvoidBottomInset: true,
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 24),
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.symmetric(horizontal: 17),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SizedBox(height: 20),
+              const SizedBox(height: 60),
 
-              // Título
-              const Text(
-                '+DevsEcomm',
-                style: TextStyle(
-                  color: AppColors.cinza,
-                  fontSize: 32,
-                  fontWeight: FontWeight.bold,
-                  letterSpacing: 1,
+              //IMAGEM LOGO
+              Center(
+                child: Image.asset(
+                  'assets/images/logo.png',
+                  width: 125,
+                  height: 125,
+                ),
+              ),
+              // TÍTULO
+              const SizedBox(height: 10),
+              const Center(
+                child: Text(
+                  '+DevsEcomm',
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600,
+                    fontFamily: 'Inter',
+                  ),
                 ),
               ),
 
-              const SizedBox(height: 40),
+              const SizedBox(height: 102),
 
-              // Campo Email
-              const AppTextField(
+              // CAMPO DE EMAIL
+              AppTextField(
                 hintText: 'email@dominio.com',
                 keyboardType: TextInputType.emailAddress,
+                onChanged: (value) {
+                  setState(() {
+                    email = value;
+                  });
+                  print('Email: $value');
+                },
               ),
 
-              const SizedBox(height: 16),
+              const SizedBox(height: 11),
 
-              // Campo Senha
-              const AppTextField(
-                hintText: 'Digite sua senha',
+              // CAMPO DE SENHA
+              AppTextField(
+                hintText: '****************',
                 obscureText: true,
-                suffixIcon: Icon(
-                  Icons.visibility_off,
-                  color: AppColors.cinza,
-                  size: 20,
-                ),
+                onChanged: (value) {
+                  setState(() {
+                    senha = value;
+                  });
+                  print('Senha: $value');
+                },
+              ),
+              // LEMBRAR-ME CHECKBOX
+              const SizedBox(height: 8),
+              Row(
+                children: [
+                  Checkbox(
+                    value: rememberMe,
+                    // ignore: deprecated_member_use
+                    fillColor: MaterialStateProperty.resolveWith<Color>(
+                      // ignore: deprecated_member_use
+                      (states) => states.contains(MaterialState.selected)
+                          ? AppColors.preto
+                          : AppColors.branco,
+                    ),
+                    checkColor: AppColors.branco,
+                    side: const BorderSide(color: AppColors.preto),
+                    onChanged: (value) {
+                      setState(() {
+                        rememberMe = value ?? false;
+                      });
+                      print('Lembrar-me: $rememberMe');
+                    },
+                  ),
+                  const SizedBox(width: 8),
+                  const Text(
+                    'Lembrar-me',
+                    style: TextStyle(color: Colors.black, fontSize: 14),
+                  ),
+                ],
               ),
 
               const SizedBox(height: 12),
 
-              // Esqueci minha senha
+              // ESQUECI MINHA SENHA
               Align(
                 alignment: Alignment.centerRight,
                 child: TextButton(
@@ -73,58 +128,65 @@ class LoginPage extends StatelessWidget {
                   ),
                   child: const Text(
                     'Esqueci minha senha',
+                    textAlign: TextAlign.right,
                     style: TextStyle(
-                      color: AppColors.cinza,
-                      fontSize: 14,
-                      fontWeight: FontWeight.w500,
+                      color: AppColors.preto,
+                      fontFamily: 'Inter',
+                      fontSize: 12,
+                      height: 1.5,
+                      letterSpacing: 0,
+                      fontStyle: FontStyle.normal,
                     ),
                   ),
                 ),
               ),
 
-              const SizedBox(height: 24),
+              const SizedBox(height: 17),
 
-              // Botão Entrar
-              AppElevatedButton(label: 'Entrar', onPressed: () {}),
+              // BOTÃO ENTRAR - FAZ O LOGIN
+              AppElevatedButton(
+                label: 'Entrar',
+                onPressed: isActiveButton
+                    ? () {
+                        // Aqui você pode adicionar a lógica de login
+                        print('Email: $email');
+                        print('Senha: $senha');
+                      }
+                    : null,
+              ),
 
-              const SizedBox(height: 12),
+              const SizedBox(height: 16),
 
-              // Botão Cadastrar-se (estilo texto)
-              AppTextButton(label: 'Cadastrar-se', onPressed: () {}),
+              // BOTÃO CADASTRAR - VAI PARA SIGNUP PAGE
+              AppTextButton(
+                label: 'Cadastrar-se',
+                onPressed: () {
+                  Navigator.pushNamed(context, SignupPage.routeName);
+                },
+              ),
 
-              const Spacer(),
+              const SizedBox(height: 100),
 
-              // Termos e Políticas
-              Padding(
-                padding: const EdgeInsets.only(bottom: 16),
-                child: GestureDetector(
-                  onTap: () {},
+              // TERMOS E POLÍTICA
+              Center(
+                child: Padding(
+                  padding: const EdgeInsets.only(bottom: 68),
                   child: RichText(
                     textAlign: TextAlign.center,
                     text: const TextSpan(
+                      style: TextStyle(fontSize: 12),
                       children: [
                         TextSpan(
                           text: 'Termos de Serviço ',
-                          style: TextStyle(
-                            color: AppColors.preto,
-                            fontSize: 13,
-                            fontWeight: FontWeight.w500,
-                          ),
+                          style: TextStyle(color: Colors.black),
                         ),
                         TextSpan(
-                          text: '⇨ ',
-                          style: TextStyle(
-                            color: AppColors.cinza,
-                            fontSize: 13,
-                          ),
+                          text: 'e ',
+                          style: TextStyle(color: AppColors.cinza),
                         ),
                         TextSpan(
                           text: 'Política de Privacidade',
-                          style: TextStyle(
-                            color: AppColors.preto,
-                            fontSize: 13,
-                            fontWeight: FontWeight.w500,
-                          ),
+                          style: TextStyle(color: Colors.black),
                         ),
                       ],
                     ),

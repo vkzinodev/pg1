@@ -1,4 +1,3 @@
-// widgets/app_rich_text.dart
 import 'package:flutter/material.dart';
 import 'package:pg1/shered/app_colors.dart';
 
